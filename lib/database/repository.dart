@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc_training/database/connection.dart';
 import 'package:bloc_training/database/tables.dart';
 import 'package:bloc_training/models/user.dart';
@@ -20,12 +22,13 @@ class Repository {
   //SIGN UP
   Future<int> registerUser(Users user) async {
     final db = await databaseHelper.initDB();
-    //First check whether user has already exist
+    //First check whether user has already exist or not then create it.
     final isDuplicate = await db.query(Tables.userTableName,
         where: 'username = ?', whereArgs: [user.username]);
     if (isDuplicate.isNotEmpty) {
       return 0;
     } else {
+      //if not create the user
       return await db.insert(Tables.userTableName, user.toJson());
     }
   }
@@ -34,7 +37,8 @@ class Repository {
     final db = await databaseHelper.initDB();
     final res = await db.query(Tables.userTableName,
         where: 'username = ?', whereArgs: [username]);
-    if (res.isEmpty) {
+    if (res.isNotEmpty) {
+      log(res.first.toString());
       return Users.fromJson(res.first);
     } else {
       throw Exception("User $username not found");
