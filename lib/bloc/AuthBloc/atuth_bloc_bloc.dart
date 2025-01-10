@@ -14,7 +14,7 @@ class AtuthBlocBloc extends Bloc<AtuthBlocEvent, AtuthBlocState> {
     on<LoginEvent>((event, emit) async {
       emit(LoadingState());
       try {
-       await Future.delayed(const Duration(seconds: 2));
+      //  await Future.delayed(const Duration(seconds: 2));
         final authenticated = await repository.authenticate(
             Users(username: event.username, password: event.password));
         if (authenticated) {

@@ -1,4 +1,5 @@
 import 'package:bloc_training/bloc/AuthBloc/atuth_bloc_bloc.dart';
+import 'package:bloc_training/bloc/bloc/home_bloc.dart';
 import 'package:bloc_training/database/repository.dart';
 import 'package:bloc_training/views/login.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AtuthBlocBloc(Repository()),
+    return MultiBlocProvider(
+      // create: (context) => AtuthBlocBloc(Repository()),
+      providers: [
+        BlocProvider(
+          create: (context) => AtuthBlocBloc(Repository()),
+        ),
+         BlocProvider(
+          create: (context) => HomeBloc(),
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

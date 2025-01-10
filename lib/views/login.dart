@@ -1,4 +1,5 @@
 import 'package:bloc_training/bloc/AuthBloc/atuth_bloc_bloc.dart';
+import 'package:bloc_training/bloc/bloc/home_bloc.dart';
 import 'package:bloc_training/components/buttons.dart';
 import 'package:bloc_training/components/textfields.dart';
 import 'package:bloc_training/constants/env.dart';
@@ -16,17 +17,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final username = TextEditingController();
-  final password = TextEditingController();
+  final username = TextEditingController(text: "zezen123");
+  final password = TextEditingController(text: "zezen123");
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AtuthBlocBloc, AtuthBlocState>(
       listener: (context, state) {
-        if(state is Authenticated){
-          Env.gotoReplacemaent(context, const HomePage());
-        }else if(state is FailureState){
+        if (state is Authenticated) {
+          // BlocProvider(
+          //   create: (context) => HomeBloc(),
+          //   child: 
+          // );
+            Env.gotoReplacemaent(context, const HomePage());
+        } else if (state is FailureState) {
           Env.snackBar(context, state.error);
         }
         // TODO: implement listener
@@ -73,16 +78,19 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        state is LoadingState ? const CircularProgressIndicator() : Button(
-                          label: "Login",
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              context.read<AtuthBlocBloc>().add(LoginEvent(
-                                  username: username.text,
-                                  password: password.text));
-                            }
-                          },
-                        ),
+                        state is LoadingState
+                            ? const CircularProgressIndicator()
+                            : Button(
+                                label: "Login",
+                                onPressed: () {
+                                  if (formKey.currentState!.validate()) {
+                                    context.read<AtuthBlocBloc>().add(
+                                        LoginEvent(
+                                            username: username.text,
+                                            password: password.text));
+                                  }
+                                },
+                              ),
                         const SizedBox(
                           height: 15.0,
                         ),
