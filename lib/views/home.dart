@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc_training/bloc/AuthBloc/atuth_bloc_bloc.dart';
-import 'package:bloc_training/bloc/bloc/home_bloc.dart';
+import 'package:bloc_training/bloc/homeBloc/home_bloc.dart';
 import 'package:bloc_training/constants/env.dart';
 import 'package:bloc_training/views/login.dart';
 import 'package:flutter/material.dart';

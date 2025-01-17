@@ -1,5 +1,5 @@
 import 'package:bloc_training/bloc/AuthBloc/atuth_bloc_bloc.dart';
-import 'package:bloc_training/bloc/bloc/home_bloc.dart';
+import 'package:bloc_training/bloc/homeBloc/home_bloc.dart';
 import 'package:bloc_training/components/buttons.dart';
 import 'package:bloc_training/components/textfields.dart';
 import 'package:bloc_training/constants/env.dart';
